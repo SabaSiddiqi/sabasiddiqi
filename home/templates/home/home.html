@@ -1,0 +1,7 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+{% for name in hello %}
+<li style="color:{% cycle 'blue' 'green' %}">{{  name.text }}</li>
+{% endfor %}
+{% endblock %}
