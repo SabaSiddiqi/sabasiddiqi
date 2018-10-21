@@ -1,4 +1,6 @@
 from django.db import models
+
+
 # comments
 # Create your models here.
 # class model_name(models.Model):
@@ -12,6 +14,7 @@ from django.db import models
 #   model_name.save()
 #   Model_name.objects.all()
 
+
 class Name(models.Model):
     text = models.CharField(max_length=200)
 
@@ -21,5 +24,6 @@ class GraphInput(models.Model):
     y = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.x,self.y
+        template = '{0.x} {0.y}'
+        return template.format(self)
 
