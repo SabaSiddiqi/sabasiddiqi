@@ -1,20 +1,30 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from .models import Name, GraphInput
 from .forms import GraphForm, GraphInputForm
 
 
-# Comments
-# Create your views here.
-# def view_name(request):
-#   return HttpResponse('text')
-# After adding template
-#   from django.shortcuts import render_to_response
-#   return render_to_response('app_name/template_name.html',{{'func_name':"text"}})
-# After adding model
-#   from .models import line
-#   return render_to_response('app_name/template_name.html',{'func_name_in_html':Line.objects.all() })
+class page2form(TemplateView):
+
+    template_name = 'home/forms.html'
+
+    def get(self, request):
+        form=GraphInputForm()
+        data=GraphInput.objects.all()
+        context = {'form': form,'data':data}
+        return render(request, self.template_name, context)
+
+    def page2(self, request):
+        if request.method == 'POST':
+            form = GraphInputForm(request.POST)
+            if form.is_valid():
+                form.save()
+        form = GraphInputForm()
+        context = {'form': form}
+        # return render_to_response(template,context)
+        return render(request, self.template_name, context)
 
 def main_page(request):
     return HttpResponse('You are on main page')
@@ -34,16 +44,7 @@ def page1(request):
     return render_to_response(template, context)
 
 
-def page2(request):
-    if request.method == 'POST':
-        form = GraphInputForm(request.POST)
-        if form.is_valid():
-            form.save()
-    form = GraphInputForm()
-    context = {'form': form}
-    template = 'home/forms.html'
-    # return render_to_response(template,context)
-    return render(request, template, context)
+
 
 
 def page3(request):

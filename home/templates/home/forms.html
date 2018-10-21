@@ -1,12 +1,69 @@
-
 {% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n crispy_forms_field crispy_forms_filters %}
 
 {% block content %}
 
-<form method="post">
-    {% csrf_token %}
-    {{form}}
-    <button type="submit">Submit</button>
-</form>
+
+<div class="form-inline" class="container">
+  <h2>Vertical (basic) form</h2>
+  <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+      <label for="xcor">Enter X-coordinate:</label>
+          {{form.x}}
+    </div>
+    <div class="form-group">
+      <label for="ycor">Enter Y-coordinate:</label>{{form.y}}
+    </div>
+    <button type="submit" class="btn btn-default">Enter</button>
+      <button type="reset" class="btn btn-default">Clear Data</button>
+     <div>
+         {% for item in data %}
+            {{item.x}}
+            {{item.y}}
+         {% endfor %}
+     </div>
+
+
+
+      <div class="container">
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>X-Coordinate</th>
+                <th>Y-Coordinate</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{item.x}}</td>
+                <td>{{item.y}}</td>s
+            </tr>
+            {% endfor %}
+
+            </tbody>
+          </table>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </form>
+</div
 
 {% endblock %}
