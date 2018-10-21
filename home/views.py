@@ -3,7 +3,12 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from .models import Name, GraphInput
 from .forms import GraphForm, GraphInputForm
+from django.views.generic import TemplateView
 
+
+
+#class GraphInput(TemplateView):
+    #def post(self):
 
 # Comments
 # Create your views here.
@@ -50,6 +55,11 @@ def page2(request):
     return render(request, template, context)
 
 
+
+
+
+
+
 def page3(request):
     return HttpResponse('You are on Page3')
 
@@ -71,3 +81,27 @@ def graph(request):
     template = 'home/forms.html'
     # return render_to_response(template,context)
     return render(request, template, context)
+
+import django
+import io
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
+import numpy as np
+
+def img(request):
+    data_x=[]
+    data_y=[]
+    for key in GraphInput.objects.all():
+        data_x.append(key.x)
+        data_y.append(key.y)
+    plt.Figure()
+    x = data_x
+    y = data_y
+    plt.plot(x, y)
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.close('all')
+    response = HttpResponse(buf.getvalue(), content_type='image/png')
+    template = 'home/forms.html'
+    return response
