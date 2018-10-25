@@ -1,10 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'home/base.html' %}
 
-</body>
-</html>
+
+{% block content %}
+
+
+<form method="post">{% csrf_token %}
+    <div class="container">
+        Enter X-Coordinate: {{form.x}}
+        Enter Y-Coordinate: {{form.y}}
+        <button type="submit" name="add">Add</button>
+    </div>
+
+</form>
+
+<form method="post">{% csrf_token %}
+    <button type="submit" name="clear">Clear</button>
+</form>
+
+<div class="container">
+    {% csrf_token %}
+    <h2>Graph Data</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>X-Coordinate</th>
+                <th>Y-Coordinate</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for value in data %}
+            <tr>
+                <td>{{value.x}}</td>
+                <td>{{value.y}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<form method = "post" action = ".">{% csrf_token %}
+
+    <select name = "colors" >
+        <option value="r">Red</option>
+        <option value="b">Blue</option>
+        <option value="g">Green</option>
+        <option value="c">Cyan</option>
+        <option value="m">Magenta</option>
+        <option value="y">Yellow</option>
+        <option value="k">Black</option>
+        <option value="w">White</option>
+    </select>
+    <button  type = "submit" > Select </button>
+
+    <select name = "types" >
+        <option value="line">Line</option>
+        <option value="scatter">Scatter</option>
+    </select>
+    <button  type = "submit"  name="droplist" > Select </button>
+
+</form>
+
+<img src="/home/img.png/">
+
+
+
+
+{% endblock %}
+

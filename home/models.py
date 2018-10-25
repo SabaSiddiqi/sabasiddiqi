@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # comments
 # Create your models here.
 # class model_name(models.Model):
@@ -14,16 +13,19 @@ from django.db import models
 #   model_name.save()
 #   Model_name.objects.all()
 
-
-class Name(models.Model):
-    text = models.CharField(max_length=200)
-
-
 class GraphInput(models.Model):
-    x = models.CharField(max_length=200)
-    y = models.CharField(max_length=200)
+    x = models.IntegerField()
+    y = models.IntegerField()
 
     def __str__(self):
         template = '{0.x} {0.y}'
+        return template.format(self)
+
+class GraphOptions(models.Model):
+    color = models.CharField (max_length=20)
+    type = models.CharField (max_length=20)
+
+    def __str__(self):
+        template = '{0.color} {0.type}'
         return template.format(self)
 

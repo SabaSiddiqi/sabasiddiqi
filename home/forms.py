@@ -1,13 +1,14 @@
 from django import forms
-from .models import GraphInput
-
-
-class GraphForm(forms.Form):
-    x = forms.IntegerField()
-    y = forms.IntegerField()
+from .models import GraphInput, GraphOptions
 
 
 class GraphInputForm(forms.ModelForm):
     class Meta:
         model = GraphInput
         fields = ('x', 'y')
+
+
+class GraphOptionsForm(forms.ModelForm):
+    class Meta:
+        model = GraphOptions
+        fields = ('color','type')

@@ -9,7 +9,7 @@ urlpatterns = [
     # path('link/', views.link_view_name),
 
     path('admin/', admin.site.urls),
-    path('', views.main_page),
-    path('home/', include('home.urls')),
+    path('', views.main_page , name='mainpage'),
+    path('home/', include('home.urls',namespace='home')),
 
 ]
