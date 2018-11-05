@@ -7,6 +7,11 @@ class GraphInputForm(forms.ModelForm):
         model = GraphInput
         fields = ('x', 'y')
 
+        widgets = {
+            'x' : forms.TextInput(attrs={'size':'3', 'maxlength':'3'}),
+            'y' : forms.TextInput(attrs={'size':'3', 'maxlength':'3'})
+        }
+
 
 class GraphOptionsForm(forms.ModelForm):
     class Meta:
