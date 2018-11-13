@@ -1,43 +1,51 @@
 {% extends 'home/base.html' %}
-
 {% block content %}
 
 <div class="container">
 
     <div class="row">
         <div class="col-md-6 hello">
+
             <div class="row">
                 <form method="post">{% csrf_token %}
-                Enter X-Coordinate: {{form.x}}
-                Enter Y-Coordinate: {{form.y}}
-                <button type="submit" name="add">Add</button>
+                    <div class="col-md-6">
+                        Enter X-Coordinate:  {{form.x}}
+                        <br>
+                        <br>
+                        Enter Y-Coordinate:  {{form.y}}
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" name="add">Add Values</button>
+                        <br>
+                        <br>
+                    </div>
                 </form >
-            </div>
-            <div class="row">
-                <form method="post" >{% csrf_token %}
-                <button type="submit" name="clear">Clear</button>
+                <form method="get">{% csrf_token %}
+                    <button type="submit" name="clear">Clear Graph</button>
                 </form>
             </div>
-            <div class="row">
+
+            <h2>Graph Data</h2>
+            <div class="row table-wrapper-scroll-y">
                 {% csrf_token %}
-                    <h2>Graph Data</h2>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered ">
                         <thead>
                             <tr>
-                                <th>X-Coordinate</th>
-                                <th>Y-Coordinate</th>
+                                <th class="">X-Coordinate</th>
+                                <th class="">Y-Coordinate</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for value in data %}
                             <tr>
-                                <td>{{value.x}}</td>
-                                <td>{{value.y}}</td>
+                                <td class="">{{value.x}}</td>
+                                <td class="">{{value.y}}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
             </div>
+
             <div class="row">
                 <form method = "post" action = ".">{% csrf_token %}
                 <select name = "colors" >
@@ -68,4 +76,3 @@
 </div>
 
 {% endblock %}
-

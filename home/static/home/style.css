@@ -1,0 +1,18 @@
+.blue {
+  background-color: green;
+}
+
+.br {
+      border-style: solid;
+      border-width: 1px;
+}
+
+.lol {
+    background-color:blue;
+}
+.table-wrapper-scroll-y {
+  display: block;
+  max-height: 400px;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}

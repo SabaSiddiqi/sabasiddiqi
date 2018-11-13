@@ -18,21 +18,26 @@ def graphplotter(request):
 
     if request.method == 'POST' and 'add' in request.POST:
         form = GraphInputForm(request.POST)
+        print('Add Data')
         if form.is_valid():
+            print('Form is valid')
             form.save()
 
-    if request.method == 'POST' and 'clear' in request.POST:
+    if request.method == 'GET' and 'clear' in request.GET:
         GraphInput.objects.all().delete()
+        print('Clear Data')
 
     if request.method == 'POST' and 'colors' in request.POST:
+        print('Color Selected')
         request.session['color_sel'] = request.POST['colors']
 
     if request.method == 'POST' and 'types' in request.POST:
+        print('Line Selected')
         request.session['plot_type'] = request.POST['types']
 
     form = GraphInputForm()
 
-    data=GraphInput.objects.all()
+    data = GraphInput.objects.all()
     template = 'home/plot.html'
     context = {'form': form, 'data': data}
     return render(request, template, context)

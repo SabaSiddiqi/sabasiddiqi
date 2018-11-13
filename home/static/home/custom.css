@@ -2,6 +2,7 @@
       margin-left: 50px !important;
 }
 
-body {
-    background: white url("images/background.gif") no-repeat;
+
+.col-md-6:first-child {
+  background-color: green;
 }
