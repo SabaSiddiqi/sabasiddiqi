@@ -25,6 +25,8 @@ def graphplotter(request):
 
     if request.method == 'GET':
         GraphInput.objects.all().delete()
+        request.session['color_sel'] = 'red'
+        request.session['plot_type'] = 'line'
         print('Clear Data')
 
     if request.method == 'POST' and 'colors' in request.POST:
@@ -112,7 +114,6 @@ def img(request):
     plt.savefig(buf, format='png')
     plt.close('all')
     response = HttpResponse(buf.getvalue(), content_type='image/png')
-    template = 'home/forms.html'
     return response
 
 
