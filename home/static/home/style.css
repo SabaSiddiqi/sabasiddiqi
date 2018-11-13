@@ -1,18 +1,16 @@
-.blue {
-  background-color: green;
+.b-set{
+    border-style:solid;
+    border-color:white;
+    padding:20px;
+    border-width:2px;
+    background-color:WhiteSmoke;
+    border-radius:25px;
 }
 
-.br {
-      border-style: solid;
-      border-width: 1px;
-}
-
-.lol {
-    background-color:blue;
-}
 .table-wrapper-scroll-y {
   display: block;
-  max-height: 400px;
+  max-height: 300px;
   overflow-y: auto;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+

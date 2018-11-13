@@ -7,8 +7,8 @@ class GraphInputForm(forms.ModelForm):
         model = GraphInput
         fields = ['x','y']
         widgets = {
-            'x': forms.TextInput(attrs={'size':'10','maxlength':'3'}),
-            'y': forms.TextInput(attrs={'size':'10', 'maxlength':'3'})
+            'x': forms.TextInput(attrs={'type': 'number','id':'form_homework','min': '-1000.00','max':'1000.00','step':'0.01'}),
+            'y': forms.TextInput(attrs={'type': 'number','id':'form_homework','min': '-1000.00','max':'1000.00','step':'0.01'})
         }
 
 

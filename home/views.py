@@ -23,7 +23,7 @@ def graphplotter(request):
             print('Form is valid')
             form.save()
 
-    if request.method == 'GET' and 'clear' in request.GET:
+    if request.method == 'GET':
         GraphInput.objects.all().delete()
         print('Clear Data')
 

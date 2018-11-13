@@ -15,8 +15,8 @@ from django.db import models
 
 
 class GraphInput(models.Model):
-    x = models.IntegerField()
-    y = models.IntegerField()
+    x = models.FloatField()
+    y = models.FloatField()
 
     #def __str__(self):
         #template = '{0.x} {0.y}'
