@@ -1,6 +1,47 @@
 {% extends 'home/base.html' %}
+
+{% block title %}
+Saba Siddiqi
+{% endblock %}
+
 {% block content %}
-{% for name in hello %}
-<li style="color:{% cycle 'blue' 'green' %}">{{  name.text }}</li>
-{% endfor %}
+
+
+<div class="container">
+
+    <ul class="list-group">
+        <li class="list-group-item disabled">Projects</li>
+        <li class="list-group-item">Web Apps
+            <ul class="list-group">
+                <li class="list-group-item" style="margin-top:10px;padding-left:30px;"> Graph Plotter
+                    <a target="_blank" href="{%url 'home:gplot' %}">v 1.0</a>
+                </li>
+            </ul>
+        </li>
+        <li class="list-group-item disabled">Machine Learning</li>
+        <li class="list-group-item">Data Preparation and Cleaning
+            <ul class="list-group">
+                <li class="list-group-item" style="margin-top:10px;">
+                    <a style="padding-left:10px;" target="_blank" href="https://www.kaggle.com/sabasiddiqi/google-play-store-apps-data-cleaning">
+                        Google Play Store Apps - Data Cleaning
+                    </a>
+                </li>
+                <li class="list-group-item" >
+                    <a style="padding-left:10px;" target="_blank" href="https://www.kaggle.com/sabasiddiqi/data-examination-and-cleaning">
+                        Horse Colic Dataset - Data Examination and Cleaning
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="list-group-item">
+          <a target="_blank" href="https://www.kaggle.com/sabasiddiqi/principle-component-analysis-explained">
+              Principle Component analysis Explanation
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a target="_blank" href=".">Toxic Comment Classification</a>
+        </li>
+    </ul>
+
+
 {% endblock %}

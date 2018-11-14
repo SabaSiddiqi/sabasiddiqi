@@ -4,8 +4,8 @@ from django.shortcuts import render_to_response
 from .models import GraphInput
 from .forms import GraphInputForm, GraphOptionsForm
 from django.shortcuts import redirect
-from django.urls import reverse
-from django.views.generic import TemplateView
+from django.http import FileResponse, Http404
+
 
 def main_page(request):
     return redirect('home:homepage')
@@ -125,3 +125,14 @@ def page_objects(request):
             answer = form.cleaned_data['col']
             return answer
     else: print('hello')
+
+
+import os
+from sabasiddiqi.settings import MEDIA_ROOT,STATIC_DIR
+
+def pdf_view(request):
+    try:
+        return FileResponse(open(MEDIA_ROOT/'sabasiddiqi_resume.pdf','rb'), content_type='application/pdf')
+    except FileNotFoundError:
+        raise Http404()
+#C:\Users\sabas\Workspace\sabasiddiqi\sabasiddiqi\media\sabasiddiqi_resume.pdf

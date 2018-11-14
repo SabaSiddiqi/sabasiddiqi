@@ -2,15 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
-  <title>Bootstrap Example</title>
+  <title>    {% block title %} {% endblock %}
+  </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 
 <body>
@@ -18,14 +19,18 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
+      <a class="navbar-brand" href="#">Saba Siddiqi</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="{% url 'home:homepage' %}">Home</a></li>
-      <li><a href="{% url 'home:page1' %}">Page 1</a></li>
-      <li><a href="{% url 'home:page2' %}">Page 2</a></li>
-      <li><a href="{% url 'home:page3' %}">Page 3</a></li>
       <li><a href="{% url 'home:gplot' %}">Graph Plotter</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a target="_blank" href="{% url 'home:resume' %}">Resume</a></li>
+      <li><a target="_blank" href="https://github.com/SabaSiddiqi"><span class="fab fa-github fa-lg"></span> Github </a></li>
+      <li><a target="_blank" href="https://www.linkedin.com/in/saba-siddiqi-77428071/"><span class="fab fa-linkedin fa-lg"></span> LinkdIn </a></li>
+      <li><a target="_blank" href="https://www.kaggle.com/sabasiddiqi/"><span class="fab fa-kaggle fa-lg"></span> Kaggle </a></li>
+
     </ul>
   </div>
 </nav>

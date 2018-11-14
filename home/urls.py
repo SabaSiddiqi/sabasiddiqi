@@ -15,5 +15,6 @@ urlpatterns = [
     path('4/',views.page4, name='page4'),
     path('graph/',views.graph, name='graph'),
     path('img.png/', views.img,name='img'),
+    path('resume/', views.pdf_view,name='resume'),
     path('graphplotter/', views.graphplotter,name='gplot'),
 ]
