@@ -132,7 +132,11 @@ from sabasiddiqi.settings import MEDIA_ROOT,STATIC_DIR
 
 def pdf_view(request):
     try:
-        return FileResponse(open(MEDIA_ROOT/'sabasiddiqi_resume.pdf','rb'), content_type='application/pdf')
+        dir_name=MEDIA_ROOT
+        base_filename='sabasiddiqi_resume'
+        suffix = '.pdf'
+        resume_path=os.path.join(dir_name, base_filename + suffix)
+        return FileResponse(open(resume_path,'rb'), content_type='application/pdf')
     except FileNotFoundError:
         raise Http404()
 #C:\Users\sabas\Workspace\sabasiddiqi\sabasiddiqi\media\sabasiddiqi_resume.pdf
