@@ -5,7 +5,10 @@ from .models import GraphInput
 from .forms import GraphInputForm, GraphOptionsForm
 from django.shortcuts import redirect
 from django.http import FileResponse, Http404
-
+import os
+from sabasiddiqi.settings import MEDIA_ROOT
+import io
+import matplotlib.pyplot as plt
 
 def main_page(request):
     return redirect('home:homepage')
@@ -13,6 +16,42 @@ def main_page(request):
 def homepage(request):
     template = 'home/home.html'
     return render_to_response(template)
+
+def graphplotterv2(request):
+
+    if request.method == 'POST' and 'add' in request.POST:
+        form = GraphInputForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    #when the page refreshes
+    if request.method == 'GET':
+        GraphInput.objects.all().delete()
+        request.session['color_sel'] = 'red'
+        request.session['plot_type'] = 'line'
+        request.session['title'] = 'Graph'
+        request.session['xlabel'] = 'x-axis'
+        request.session['ylabel'] = 'y-axis'
+
+    if request.method == 'POST' and 'colors' in request.POST:
+        print('Color Selected')
+        request.session['color_sel'] = request.POST['colors']
+
+    if request.method == 'POST' and 'labels' in request.POST:
+        if request.POST['title']:   request.session['title'] = request.POST['title']
+        if request.POST['xlabel']:  request.session['xlabel'] = request.POST['xlabel']
+        if request.POST['ylabel']:  request.session['ylabel'] = request.POST['ylabel']
+
+    if request.method == 'POST' and 'types' in request.POST:
+        print('Line Selected')
+        request.session['plot_type'] = request.POST['types']
+
+    form = GraphInputForm()
+
+    data = GraphInput.objects.all()
+    template = 'home/plot2.html'
+    context = {'form': form, 'data': data}
+    return render(request, template, context)
 
 def graphplotter(request):
 
@@ -37,6 +76,7 @@ def graphplotter(request):
         print('Line Selected')
         request.session['plot_type'] = request.POST['types']
 
+
     form = GraphInputForm()
 
     data = GraphInput.objects.all()
@@ -44,58 +84,12 @@ def graphplotter(request):
     context = {'form': form, 'data': data}
     return render(request, template, context)
 
-
-def page1(request):
-    pass
-
-def page2(request):
-    if request.method == 'POST' and 'add' in request.POST:
-        form = GraphInputForm(request.POST)
-        if form.is_valid():
-            form.save()
-    if request.method == 'POST' and 'clear' in request.POST:
-        GraphInput.objects.all().delete()
-    form = GraphInputForm()
-
-    data=GraphInput.objects.all()
-
-    context = {'form': form, 'data':data}
-    template = 'home/forms.html'
-    return render(request, template, context)
-
-
-def page3(request):
-    return HttpResponse('You are on Page3')
-
-
-def page4(request):
-    return HttpResponse('You are on Page4')
-
-
-def graph(request):
-    if request.method == 'POST':
-        form = GraphForm(request.POST)
-        if form.is_valid():
-            x = form.cleaned_data['x']
-            y = form.cleaned_data['y']
-            print(x, y)
-
-    form = GraphForm()
-    context = {'form': form}
-    template = 'home/forms.html'
-    # return render_to_response(template,context)
-    return render(request, template, context)
-
-import django
-import io
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from matplotlib.figure import Figure
-import matplotlib.pyplot as plt
-import numpy as np
-
 def img(request):
     color_sel = request.session['color_sel']
     plot_type = request.session['plot_type']
+    title_name = request.session['title']
+    x_label = request.session['xlabel']
+    y_label = request.session['ylabel']
     data_x=[]
     data_y=[]
     for key in GraphInput.objects.all():
@@ -110,25 +104,14 @@ def img(request):
         plt.scatter(x, y, color=color_sel)
     else:
         plt.plot(x, y, color=color_sel)
+    plt.title(title_name)
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
     buf = io.BytesIO()
     plt.savefig(buf, format='png')
     plt.close('all')
     response = HttpResponse(buf.getvalue(), content_type='image/png')
     return response
-
-
-def page_objects(request):
-    if request.method == 'POST':
-        print('Hiiiiii')
-        form = GraphOptionsForm(request.POST)
-        if form.is_valid():
-            answer = form.cleaned_data['col']
-            return answer
-    else: print('hello')
-
-
-import os
-from sabasiddiqi.settings import MEDIA_ROOT,STATIC_DIR
 
 def pdf_view(request):
     try:
@@ -139,4 +122,4 @@ def pdf_view(request):
         return FileResponse(open(resume_path,'rb'), content_type='application/pdf')
     except FileNotFoundError:
         raise Http404()
-#C:\Users\sabas\Workspace\sabasiddiqi\sabasiddiqi\media\sabasiddiqi_resume.pdf
+    #C:\Users\sabas\Workspace\sabasiddiqi\sabasiddiqi\media\sabasiddiqi_resume.pdf

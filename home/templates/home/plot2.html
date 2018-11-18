@@ -1,0 +1,118 @@
+{% extends 'home/base.html' %}
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6" name="left-side">
+
+            <div class="row">
+
+                <div class="col-md-8 b-set">
+
+                    <form method="post">{% csrf_token %}
+                    <div class="col-md-6">
+                        Enter X-Coordinate:  {{form.x}}
+                        <br>
+                        Enter Y-Coordinate:  {{form.y}}
+                    </div>
+                    <div class="col-md-6">
+                        <br>
+                        <button type="submit" name="add" class="btn btn-primary">Add Values</button>
+                    </div>
+                     </form >
+                    <form method="get">{% csrf_token %}
+                    <button type="submit" name="clear" style="margin-left:3%;margin-top:2%;" class="btn btn-primary">Clear Graph</button>
+                    </form>
+
+                </div>
+
+                <div class="col-md-4 b-set">
+
+                    <form method = "post" action = ".">{% csrf_token %}
+                    <h5> Plot Options </h5><br>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-dark btn-block dropdown-toggle" data-toggle="dropdown"> Color <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><button  type = "submit"  name="colors" value="black" class="btn btn-link"> Black </button></li>
+                            <li><button  type = "submit"  name="colors" value="blue" class="btn btn-link"> Blue </button></li>
+                            <li><button  type = "submit"  name="colors" value="red" class="btn btn-link"> Red </button></li>
+                            <li><button  type = "submit"  name="colors" value="green" class="btn btn-link"> Green </button></li>
+                            <li><button  type = "submit"  name="colors" value="cyan" class="btn btn-link"> Cyan </button></li>
+                            <li><button  type = "submit"  name="colors" value="magenta" class="btn btn-link"> Magenta </button></li>
+                            <li><button  type = "submit"  name="colors" value="Yellow" class="btn btn-link"> Yellow </button></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown"> Type <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><button  type = "submit"  name="types" value="line" class="btn btn-link"> Line </button></li>
+                            <li><button  type = "submit"  name="types" value="scatter" class="btn btn-link"> Scatter </button></li>
+                        </ul>
+                    </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div class="row b-set" >
+                <a data-toggle="collapse" data-target="#demo">Graph Labels:</a><br>
+                <div id="demo" class="panel-collapse collapse">
+                    <br>
+                    <form method="post">{% csrf_token %}
+                <div class="input-group">
+                    <span class="input-group-addon">Title</span>
+                    <input type="text" class="form-control" name="title" placeholder="Enter title here">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">X-Label</span>
+                    <input type="text" class="form-control" name="xlabel" placeholder="Enter x-label here">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">Y-Label</span>
+                    <input type="text" class="form-control" name="ylabel" placeholder="Enter y-label here">
+                </div>
+                <br>
+                <button type="submit" name="labels" class="btn btn-primary">Set</button>
+            </form>
+                </div>
+            </div>
+
+            <h3>Graph Data</h3>
+
+            <div class="row table-wrapper-scroll-y" name="data-table">
+                {% csrf_token %}
+                    <table class="table table-bordered ">
+                        <thead>
+                            <tr>
+                                <th class="">X-Coordinate</th>
+                                <th class="">Y-Coordinate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for value in data %}
+                            <tr>
+                                <td class="">{{value.x}}</td>
+                                <td class="">{{value.y}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+
+
+        </div>
+
+
+        <div class="col-md-6">
+            <img src="/home/img.png/">
+            <a style="float:right;" href="/home/img.png" download><span class="fas fa-download fa-lg"></span>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

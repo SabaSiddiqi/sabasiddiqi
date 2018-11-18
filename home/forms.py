@@ -16,3 +16,4 @@ class GraphOptionsForm(forms.ModelForm):
     class Meta:
         model = GraphOptions
         fields = ['color','type']
+
