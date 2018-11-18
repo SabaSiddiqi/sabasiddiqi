@@ -1,13 +1,17 @@
 {% extends 'home/base.html' %}
+{% block title %} Graph Plotter{% endblock %}
 {% block content %}
 
 <div class="container">
 
     <div class="row">
+
+        <!-- Graph Info -->
         <div class="col-md-6" name="left-side">
 
             <div class="row">
 
+                <!-- Enter Data -->
                 <div class="col-md-8 b-set">
 
                     <form method="post">{% csrf_token %}
@@ -21,12 +25,15 @@
                         <button type="submit" name="add" class="btn btn-primary">Add Values</button>
                     </div>
                      </form >
-                    <form method="get">{% csrf_token %}
-                    <button type="submit" name="clear" style="margin-left:3%;margin-top:2%;" class="btn btn-primary">Clear Graph</button>
+                    <form method="get">
+                        <button type="submit" name="clear" style="margin-left:3%;margin-top:2%;" class="btn btn-primary">
+                            Clear Graph
+                        </button>
                     </form>
 
                 </div>
 
+                <!-- Graph Options -->
                 <div class="col-md-4 b-set">
 
                     <form method = "post" action = ".">{% csrf_token %}
@@ -56,6 +63,7 @@
 
             </div>
 
+            <!-- Graph Labels -->
             <div class="row b-set" >
                 <a data-toggle="collapse" data-target="#demo">Graph Labels:</a><br>
                 <div id="demo" class="panel-collapse collapse">
@@ -79,8 +87,12 @@
                 </div>
             </div>
 
-            <h3>Graph Data</h3>
-
+            <!-- Graph Data and Download -->
+            <h4><br>Graph Data
+                <a style="float:right;" href="{%url 'home:xlsx' %}" download>
+                    <span class="fas fa-download fa-md"></span>
+                </a>
+            </h4>
             <div class="row table-wrapper-scroll-y" name="data-table">
                 {% csrf_token %}
                     <table class="table table-bordered ">
@@ -101,10 +113,9 @@
                     </table>
             </div>
 
-
         </div>
 
-
+        <!-- Graph -->
         <div class="col-md-6">
             <img src="/home/img.png/">
             <a style="float:right;" href="/home/img.png" download><span class="fas fa-download fa-lg"></span>

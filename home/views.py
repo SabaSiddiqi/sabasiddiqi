@@ -1,14 +1,13 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render, render_to_response
 from .models import GraphInput
-from .forms import GraphInputForm, GraphOptionsForm
+from .forms import GraphInputForm
 from django.shortcuts import redirect
-from django.http import FileResponse, Http404
+from django.http import FileResponse, Http404, HttpResponse
 import os
 from sabasiddiqi.settings import MEDIA_ROOT
 import io
 import matplotlib.pyplot as plt
+import xlsxwriter
 
 def main_page(request):
     return redirect('home:homepage')
@@ -123,3 +122,36 @@ def pdf_view(request):
     except FileNotFoundError:
         raise Http404()
     #C:\Users\sabas\Workspace\sabasiddiqi\sabasiddiqi\media\sabasiddiqi_resume.pdf
+
+#https://stackoverflow.com/questions/39394861/read-django-data-from-model-and-write-it-using-xlsxwriter
+def table_download(request):
+    # Create a workbook and add a worksheet.
+    output = io.BytesIO()
+    workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+    worksheet = workbook.add_worksheet('Reporte3a5')
+    bold = workbook.add_format({'bold': True})
+    # Some data we want to write to the worksheet.
+    reporte = GraphInput.objects.all() #my model
+
+    # Start from the first cell. Rows and columns are zero indexed.
+    row = 1
+    col = 0
+
+    # Iterate over the data and write it out row by row.
+    for linea in reporte:
+        worksheet.write(row, col, linea.x)
+        worksheet.write(row, col + 1, linea.y)
+        #worksheet.write(row, col + 2, linea.ship_set)
+        row += 1
+
+    # Write the title for every column in bold
+    worksheet.write('A1','X-Coordinate', bold)
+    worksheet.write('B1', 'Y-Coordinate', bold)
+
+    workbook.close()
+
+    output.seek(0)
+    response = HttpResponse(output.read(), content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response['Content-Disposition'] = "attachment; filename=Reporte3a5.xlsx"
+
+    return response

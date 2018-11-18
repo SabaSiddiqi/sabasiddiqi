@@ -16,11 +16,17 @@
 
 <body>
 
+<!-- Navigation Bar Horizontal -->
 <nav class="navbar navbar-inverse navbar-expand-sm">
+
   <div class="container-fluid">
+
+    <!-- Nav Header -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Saba Siddiqi</a>
+      <a class="navbar-brand" href="{% url 'mainpage' %}">Saba Siddiqi</a>
     </div>
+
+    <!-- NAv Oprtions -->
     <ul class="nav navbar-nav">
       <li class="active"><a href="{% url 'home:homepage' %}">Home</a></li>
      <!-- Dropdown -->
@@ -33,19 +39,19 @@
         <a href="{% url 'home:gplot2' %}" class="dropdown-item" href="#">Version 2</a>
       </div>
     </li>
-
-
-
-
     </ul>
+
+    <!-- Right Media Links -->
     <ul class="nav navbar-nav navbar-right">
       <li><a target="_blank" href="{% url 'home:resume' %}">Resume</a></li>
       <li><a target="_blank" href="https://github.com/SabaSiddiqi"><span class="fab fa-github fa-lg"></span> Github </a></li>
       <li><a target="_blank" href="https://www.linkedin.com/in/saba-siddiqi-77428071/"><span class="fab fa-linkedin fa-lg"></span> LinkdIn </a></li>
       <li><a target="_blank" href="https://www.kaggle.com/sabasiddiqi/"><span class="fab fa-kaggle fa-lg"></span> Kaggle </a></li>
-
     </ul>
+
   </div>
+
+
 </nav>
 
 <div>

@@ -25,11 +25,4 @@ class GraphInput(models.Model):
     #   return '%d %d' % (self.x, self.y)
 
 
-class GraphOptions(models.Model):
-    color = models.CharField (max_length=20)
-    type = models.CharField (max_length=20)
-
-    #def __str__(self):
-    #    template = '{0.color} {0.type}'
-    #    return template.format(self)
 
