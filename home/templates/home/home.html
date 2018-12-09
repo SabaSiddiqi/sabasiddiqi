@@ -9,10 +9,14 @@ Saba Siddiqi
 
 <div class="container">
 
-    <ul class="list-group">
+<div class="row">
 
-        <li class="list-group-item disabled"><h4>Machine Learning Notebooks</h4></li>
-            <li class="list-group-item">Data Preparation and Cleaning
+    <div class="col-md-8">
+        <ul class="list-group">
+
+        <li class="list-group-item disabled" style="opacity:10;"><h4>Machine Learning Notebooks</h4></li>
+            <li class="list-group-item" style="background-color:rgba(255, 0, 0, 0.3);">
+                <h4 style="color:white;">Data Preparation and Cleaning</h4>
                 <ul class="list-group">
                     <li class="list-group-item" style="margin-top:10px;">
                         <a style="padding-left:10px;" target="_blank" href="https://www.kaggle.com/sabasiddiqi/google-play-store-apps-data-cleaning">
@@ -66,6 +70,36 @@ Saba Siddiqi
                     </li>
                 </ul>
 
+
+        </ul>
+    </div>
+
+    <div class="col-md-4">
+
+        <ul class="list-group">
+        <li class="list-group-item disabled"><h4>It's Never too Late</h4></li>
+                       <li class="list-group-item">
+                           <h3>
+                           <q><i>All our dreams can come true,
+                               if we have the courage to pursue them.</i></q>
+                               <br><h4 align="right">– Walt Disney</h4></h3>
+                       </li>
+                </ul>
+            </li>
+        </ul>
+
+        <audio controls>
+            <source src="{{ song.audio_file.url }}" type="audio/mpeg">
+        </audio>
+
+    </div>
+
+
+
+</div>
+
+
+</div>
 
 
 {% endblock %}
