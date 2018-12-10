@@ -29,16 +29,7 @@
     <!-- NAv Oprtions -->
     <ul class="nav navbar-nav">
       <li class="active"><a href="{% url 'home:homepage' %}">Home</a></li>
-     <!-- Dropdown -->
-      <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Graph Plotter
-      </a>
-      <div class="dropdown-menu">
-        <a href="{% url 'home:gplot' %}" class="dropdown-item" href="#">Version 1</a><br>
-        <a href="{% url 'home:gplot2' %}" class="dropdown-item" href="#">Version 2</a>
-      </div>
-    </li>
+      <li class="active"><a href="{% url 'home:gplot2' %}">GraphPlotter</a></li>
     </ul>
 
     <!-- Right Media Links -->
