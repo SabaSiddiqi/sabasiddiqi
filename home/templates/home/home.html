@@ -7,7 +7,41 @@ Saba Siddiqi
 {% block content %}
 
 
+<style>
+/* unvisited link */
+a:link {
+  color: white;
+}
+
+/* visited link */
+a:visited {
+  color: white;
+}
+
+/* mouse over link */
+a:hover {
+  color: black;
+}
+
+/* selected link */
+a:active {
+  color: white;
+}
+
+.j{
+margin-top:10px;
+background-color:rgba(0, 51, 51,0.7);
+color:white;}
+
+
+
+</style>
+
+
 <div class="container">
+
+
+
 
 <div class="row">
 
@@ -15,18 +49,18 @@ Saba Siddiqi
         <ul class="list-group">
         {% load mptt_tags %}
         {% recursetree index %}
-            <li class="list-group-item disabled" style="opacity:10;"  >
-                <h4><a href={{node.link}} >{{ node.name }}</a></h4></li>
+            <li class="list-group-item disabled" style=""  >
+                <h4><b>{{ node.name }}</b></h4></li>
             {% if not node.is_leaf_node %}
                 {% for i in node.children.all %}
-                    <li class="list-group-item" style="background-color:rgba(255, 0, 0, 0.3);">
+                    <li class="list-group-item" style="background-color:#141f1f;">
                         <h4 style="color:white;"  >
                             <a href={{i.link}}>{{i.name}}</a>
                             </h4>
                     {% if not i.is_leaf_node %}
                          <ul class="list-group "  >
                         {% for j in i.children.all %}
-                            <li class="list-group-item" style="margin-top:10px;">
+                            <li class="list-group-item j">
                                  <a style="padding-left:10px;" target="_blank" href={{j.link}}>{{j}}</a>
                             </li>
                         {% endfor %}
