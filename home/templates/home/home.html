@@ -13,65 +13,36 @@ Saba Siddiqi
 
     <div class="col-md-8">
         <ul class="list-group">
-
-        <li class="list-group-item disabled" style="opacity:10;"><h4>Machine Learning Notebooks</h4></li>
-            <li class="list-group-item" style="background-color:rgba(255, 0, 0, 0.3);">
-                <h4 style="color:white;">Data Preparation and Cleaning</h4>
-                <ul class="list-group">
-                    <li class="list-group-item" style="margin-top:10px;">
-                        <a style="padding-left:10px;" target="_blank" href="https://www.kaggle.com/sabasiddiqi/google-play-store-apps-data-cleaning">
-                            Google Play Store Apps - Data Cleaning
-                        </a>
-                    </li>
-                    <li class="list-group-item" >
-                        <a style="padding-left:10px;" target="_blank" href="https://www.kaggle.com/sabasiddiqi/data-examination-and-cleaning">
-                            Horse Colic Dataset - Data Examination and Cleaning
-                        </a>
-                    </li>
-                </ul>
+        {% load mptt_tags %}
+        {% recursetree index %}
+            <li class="list-group-item disabled" style="opacity:10;"  >
+                <h4><a href={{node.link}} >{{ node.name }}</a></h4></li>
+            {% if not node.is_leaf_node %}
+                {% for i in node.children.all %}
+                    <li class="list-group-item" style="background-color:rgba(255, 0, 0, 0.3);">
+                        <h4 style="color:white;"  >
+                            <a href={{i.link}}>{{i.name}}</a>
+                            </h4>
+                    {% if not i.is_leaf_node %}
+                         <ul class="list-group "  >
+                        {% for j in i.children.all %}
+                            <li class="list-group-item" style="margin-top:10px;">
+                                 <a style="padding-left:10px;" target="_blank" href={{j.link}}>{{j}}</a>
+                            </li>
+                        {% endfor %}
+                         </ul>
+                    {% endif %}
+                {% endfor %}
             </li>
-            <li class="list-group-item">
-              <a target="_blank" href="https://www.kaggle.com/sabasiddiqi/principle-component-analysis-explained">
-                  Principle Component analysis Explanation
-              </a>
-            </li>
-            <li class="list-group-item">Toxic Comment Classification
-                <ul class="list-group">
-                    <li class="list-group-item" style="margin-top:10px;">
-                        <a style="padding-left:10px;" target="_blank" href="https://www.kaggle.com/sabasiddiqi/workbook-1-text-pre-processing-for-beginners">
-                            Workbook 1 - Text Pre-Processing for Beginners (Data Cleaning)
-                        </a>
-                    </li>
-                    <li class="list-group-item" >
-                        <a style="padding-left:10px;" target="_blank" href="https://www.kaggle.com/sabasiddiqi/workbook-2-text-preprocessing-feature-extraction">
-                            Workbook 2 - Text Pre-Processing for Beginners (Feature Extraction)
-                        </a>
-                    </li>
-                    <li class="list-group-item" >
-                        <a style="padding-left:10px;" target="_blank" href="#">
-                            Workbook 3 - <b> being updated ...</b>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        <li class="list-group-item disabled"><h4>Web Apps</h4></li>
-            <ul class="list-group-item">
-                    <li class="list-group-item" style="margin-top:10px;">
-                        <a style="padding-left:10px;" target="_blank" href="{%url 'home:gplot2' %}">
-                            Graph Plotter
-                            <a target="_blank" href="https://github.com/SabaSiddiqi/sabasiddiqi" >[Source Code]</a>
-                        </a>
-                    </li>
-                    <li class="list-group-item" style="margin-top:10px;">
-                        <a style="padding-left:10px;" target="_blank" href="#">
-                            ArtViewer <b> being updated ... </b>
-
-                        </a>
-                    </li>
-                </ul>
-
-
+            {% endif %}
+        </li>
+    {% endrecursetree %}
         </ul>
+
+
+
+
+
     </div>
 
     <div class="col-md-4">
@@ -91,13 +62,11 @@ Saba Siddiqi
         <audio controls>
             <source src="{{ song.audio_file.url }}" type="audio/mpeg">
         </audio>
-
     </div>
 
 
 
 </div>
-
 
 </div>
 

@@ -1,4 +1,8 @@
 from django.contrib import admin
-from .models import GraphInput
+from mptt.admin import MPTTModelAdmin
+from .models import GraphInput,CatIndex
+
 # Register your models here.
 admin.site.register(GraphInput)
+
+admin.site.register(CatIndex, MPTTModelAdmin)

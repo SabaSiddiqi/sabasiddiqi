@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response
-from .models import GraphInput
+from .models import GraphInput, CatIndex
 from .forms import GraphInputForm
 from django.shortcuts import redirect
 from django.http import FileResponse, Http404, HttpResponse
@@ -13,8 +13,7 @@ def main_page(request):
     return redirect('home:homepage')
 
 def homepage(request):
-    template = 'home/home.html'
-    return render_to_response(template)
+    return render(request, 'home/home.html', {'index': CatIndex.objects.all()})
 
 def graphplotterv2(request):
 
