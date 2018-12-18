@@ -20,6 +20,15 @@ def blogpage(request):
     context={'blog': Post.objects.all()}
     return render(request, 'home/blog.html', context)
 
+def blogdetail(request,blog_id):
+
+    blog_id=blog_id.replace('-',' ')
+    blog_detail=Post.objects.filter(title__iexact=blog_id).all()
+    context={'blog_detail': blog_detail}
+    #return HttpResponse("It is" + str(detail) + str(blog_id))
+    return render(request, 'home/blogdetail.html', context)
+
+
 
 def graphplotterv2(request):
 
