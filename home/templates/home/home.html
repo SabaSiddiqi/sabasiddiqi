@@ -40,9 +40,6 @@ color:white;}
 
 <div class="container">
 
-
-
-
 <div class="row">
 
     <div class="col-md-8">
@@ -93,13 +90,35 @@ color:white;}
             </li>
         </ul>
 
+        <ul class="list-group">
+        <li class="list-group-item disabled"><h4>Blogs</h4></li>
+               <li class="list-group-item">
+                    <div >
+                    {% for each_model in blog %}
+                        {% if not each_model.draft %}
+                            <h4>{{each_model.title}}</h4><br>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+
+               </li>
+                </ul>
+            </li>
+        </ul>
+
+
     </div>
 
 
 
+
 </div>
 
 </div>
+
+
+
+
 
 
 {% endblock %}

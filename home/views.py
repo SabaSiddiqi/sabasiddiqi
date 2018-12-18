@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response
-from .models import GraphInput, CatIndex
+from .models import GraphInput, CatIndex, Post
 from .forms import GraphInputForm
 from django.shortcuts import redirect
 from django.http import FileResponse, Http404, HttpResponse
@@ -13,7 +13,13 @@ def main_page(request):
     return redirect('home:homepage')
 
 def homepage(request):
-    return render(request, 'home/home.html', {'index': CatIndex.objects.all()})
+    context={'index': CatIndex.objects.all(), 'blog': Post.objects.all()}
+    return render(request, 'home/home.html', context)
+
+def blogpage(request):
+    context={'blog': Post.objects.all()}
+    return render(request, 'home/blog.html', context)
+
 
 def graphplotterv2(request):
 

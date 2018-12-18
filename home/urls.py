@@ -10,6 +10,7 @@ urlpatterns = [
     #/home/1
     path('img.png/', views.img,name='img'),
     path('resume/', views.pdf_view,name='resume'),
+    path('blog/', views.blogpage,name='blog'),
     path('graphplotter_v1/', views.graphplotter,name='gplot'),
     path('graphplotter_v2/', views.graphplotterv2,name='gplot2'),
     path('table_download/', views.table_download,name='xlsx'),

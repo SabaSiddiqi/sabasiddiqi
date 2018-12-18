@@ -1,0 +1,49 @@
+{% extends 'home/base.html' %}
+
+{% block title %}
+Saba Siddiqi
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* Add a card effect for articles */
+.card {
+   border: 1px solid;
+   padding: 20px;
+   margin-top: 20px;
+   height: 300px;
+   word-wrap: break-word;
+   margin:10px;
+}
+
+</style>
+
+<div class="container">
+
+    <h1>Saba's Blog</h1><br>
+
+    <div class="row">
+
+        {% for each_model in blog %}
+            {% if not each_model.draft %}
+                <div class="col-lg-4 card">
+                <h2>{{each_model.title}}</h2>
+                <h5>{{each_model.description}}, Dec 7, 2017</h5>
+                    <hr>
+                <p>{{each_model.content|safe}}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+
+
+
+
+</div>
+
+
+{% endblock %}
+
