@@ -13,6 +13,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main_page , name='mainpage'),
     path('home/', include('home.urls',namespace='home')),
+    path('tinymce/', include('tinymce.urls')),
 
 ]
 

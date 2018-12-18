@@ -6,3 +6,6 @@ from .models import GraphInput,CatIndex
 admin.site.register(GraphInput)
 
 admin.site.register(CatIndex, MPTTModelAdmin)
+
+from . import models
+admin.site.register(models.Post)
