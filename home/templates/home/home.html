@@ -79,24 +79,43 @@ color:white;}
     <div class="col-md-4">
 
         <ul class="list-group">
+        <li class="list-group-item disabled"><h4>About Me</h4></li>
+            <li class="list-group-item">
+                   Hello, I am Saba.
+                       I am a Machine Learning Enthusiast,
+                       with a background in Electrical and Computer Engineering.
+                      I spent most of my time solving Machine Learning Problems.
+                       And I love to paint.
+
+                    <br><h5 align="left"><b>- Learning, to make a difference.</b></h5></h4>
+
+
+            </li>
+        </li>
+        </ul>
+
+        <ul class="list-group">
         <li class="list-group-item disabled"><h4>It's Never too Late</h4></li>
                        <li class="list-group-item">
-                           <h3>
+                           <h4>
                            <q><i>All our dreams can come true,
                                if we have the courage to pursue them.</i></q>
-                               <br><h4 align="right">– Walt Disney</h4></h3>
+                               <br><h5 align="right">– Walt Disney</h5></h4>
                        </li>
-                </ul>
             </li>
         </ul>
 
         <ul class="list-group">
-        <li class="list-group-item disabled"><h4>Blogs</h4></li>
+        <li class="list-group-item disabled"><h4>Recent Blogs</h4></li>
                <li class="list-group-item">
                     <div >
                     {% for each_model in blog %}
                         {% if not each_model.draft %}
-                            <h4>{{each_model.title}}</h4><br>
+                        <h5 style="margin-left:10px;">
+                            <a href="{% url 'home:blogdetail' each_model.title|slugify %}" style="color:black;">
+                                {{each_model.title}}
+                            </a>
+                        </h5>
                         {% endif %}
                     {% endfor %}
                     </div>

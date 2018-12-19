@@ -10,36 +10,40 @@ Saba Siddiqi
 
 /* Add a card effect for articles */
 .card {
-   border: 1px solid;
    padding: 20px;
    margin-top: 20px;
-   height: 300px;
    word-wrap: break-word;
    margin:10px;
 }
 
 </style>
 
-<div class="container">
+<div class="container" >
 
-    <h1>Saba's Blog</h1><br>
+    <h1 style="color:silver;">Saba's Blog</h1><br>
 
-    <div class="row">
+        {% for each_model in blog_detail %}
+        {% if not each_model.draft %}
 
-            {% for each_model in blog_detail %}
-            {% if not each_model.draft %}
-                    <h2><a href="{% url 'home:blogdetail' each_model.title|slugify %}">{{each_model.title}}</a></h2>
-                <h5>{{each_model.description}}, Dec 7, 2017</h5>
+        <ul class="list-group">
+            <li class="list-group-item disabled">
+                <b><h2 style="margin-left:40px;">{{each_model.title}}</h2></b>
+                <h5 style="float:right;">Updated at : <b>{{each_model.updated_at}}</b></h5><br>
+            </li>
+            <li class="list-group-item">
+                <div class="card">
+                    <h5><em>{{each_model.description|safe}}</em></h5><br>
+                    <div class="a">{{each_model.content|safe}}</div>
                     <hr>
-                <p>{{each_model.content|safe}}</p>
+                    <p style="float:right;">Created at: <b>{{each_model.created_at}}</b></p>
                 </div>
-            {% endif %}
+            </li>
+                </ul>
+            </li>
+        </ul>
+
+        {% endif %}
         {% endfor %}
-
-
-    </div>
-
-
 
 
 </div>

@@ -1,5 +1,6 @@
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
+import datetime
 
 
 from django_mysql.models import ListCharField
@@ -48,6 +49,8 @@ class Post(models.Model):
     description = models.TextField(max_length=250,null=True)
     content = HTMLField('Content')
     draft = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title

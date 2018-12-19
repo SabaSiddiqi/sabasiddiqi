@@ -4,18 +4,20 @@
 Saba Siddiqi
 {% endblock %}
 
+
+
+
 {% block content %}
 
 <style>
 
 /* Add a card effect for articles */
 .card {
-    display:block;
-   border: 1px solid;
-   padding: 30px 30px 30px 30px;
+   display:block;
+   padding: 10px 10px 10px 10px;
    margin:10px;
    height:300px;
-   overflow:hidden;
+   white-space: normal;
 
 }
 
@@ -23,7 +25,8 @@ Saba Siddiqi
   overflow: hidden;
   display: inline-block;
   max-width:100%;
-  height:100px;
+  height:130px;
+
 
 }
 
@@ -32,22 +35,35 @@ Saba Siddiqi
 
 </style>
 
-<div class="container">
+<div class="container" >
 
-    <h1>Saba's Blog</h1><br>
+    <h1 style="color:white;">Saba's Blog</h1><br>
 
     <div class="row">
 
         {% for each_model in blog %}
-            {% if not each_model.draft %}
-                <div class="col-lg-4 card">
-                    <h2><a href="{% url 'home:blogdetail' each_model.title|slugify %}">{{each_model.title}}</a></h2>
-                    <h5>{{each_model.description}}, Dec 7, 2017</h5>
-                    <hr>
+        {% if not each_model.draft %}
+
+        <ul class="list-group col-md-4">
+            <li class="list-group-item disabled">
+                <h4><a href="{% url 'home:blogdetail' each_model.title|slugify %}"><b>{{each_model.title}}</b></a></h4>
+            </li>
+            <li class="list-group-item">
+                <div class="card">
+                    <h5><em>{{each_model.description}}</em></h5>
                     <div class="a">{{each_model.content|safe}}</div>
+                    <hr>
+                    <p style="float:right;">Updated at: <b>{{each_model.updated_at}}</b></p>
                 </div>
-            {% endif %}
+            </li>
+                </ul>
+            </li>
+        </ul>
+
+                    {% endif %}
         {% endfor %}
+
+
 
     </div>
 
