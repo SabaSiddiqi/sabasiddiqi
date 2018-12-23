@@ -20,6 +20,14 @@ def blogpage(request):
     context={'blog': Post.objects.all()}
     return render(request, 'home/blog.html', context)
 
+def recognize(request):
+
+    if request.method == 'POST':
+        print("hey")
+        print("hi")
+    context=None;
+    return render(request, 'home/recognize.html', context)
+
 def blogdetail(request,blog_id):
 
     blog_id=blog_id.replace('-',' ')
@@ -36,6 +44,7 @@ def graphplotterv2(request):
         form = GraphInputForm(request.POST)
         if form.is_valid():
             form.save()
+
 
     #when the page refreshes
     if request.method == 'GET':
