@@ -66,12 +66,12 @@ def recognize(request):
         arr=np.where(arr>0, 1, 0)
         test_data=[arr]
         #print(arr)
-        #X_std_test = scale.transform(test_data)
-        #print(X_std_test.size)
-        #test_pca_b = pca.transform(X_std_test)
-        #print(test_pca_b.size)
-        #result=model.predict(test_pca_b)
-        #print(result)
+        X_std_test = scale.transform(test_data)
+        print(X_std_test.size)
+        test_pca_b = pca.transform(X_std_test)
+        print(test_pca_b.size)
+        result=model.predict(test_pca_b)
+        print(result)
 
 
         #print(arr)
