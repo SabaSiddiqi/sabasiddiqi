@@ -8,6 +8,10 @@ from sabasiddiqi.settings import MEDIA_ROOT
 import io
 import matplotlib.pyplot as plt
 import xlsxwriter
+from PIL import Image
+import re
+import base64
+import numpy as np
 
 def main_page(request):
     return redirect('home:homepage')
@@ -22,9 +26,32 @@ def blogpage(request):
 
 def recognize(request):
 
+    #https://www.reddit.com/r/learnpython/comments/6lqsrp/converting_a_dataurl_to_numpy_array/
     if request.method == 'POST':
-        print("hey")
-        print("hi")
+        # in your view function
+        image_data = request.POST.get('image_data',False)
+        imgstr = re.search(r'base64,(.*)', image_data).group(1)
+        #print(imgstr)
+
+        ### To save the file
+        dir_name = "media/"
+        base_filename = "output"
+        suffix = ".png"
+        if not os.path.exists(dir_name):
+            os.makedirs(dir_name)
+        filename=os.path.join(dir_name, base_filename + suffix)
+        print("filename is",filename)
+
+        with open(filename,'wb') as f:
+            f.write(base64.b64decode(imgstr))
+
+
+        ### to save is directly as numpy array
+        image_bytes = io.BytesIO(base64.b64decode(imgstr))
+        im = Image.open(image_bytes)
+        arr = np.array(im)[:,:,0]
+        print(arr)
+
     context=None;
     return render(request, 'home/recognize.html', context)
 

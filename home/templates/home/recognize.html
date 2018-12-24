@@ -55,11 +55,15 @@ Saba Siddiqi
         }
     }
 
+
     function save() {
-        document.getElementById("canvasimg").style.border = "2px solid";
-        var dataURL = canvas.toDataURL("image/png");
-        document.getElementById("canvasimg").src = dataURL;
-        document.getElementById("canvasimg").style.display = "inline";
+       //document.getElementById("canvasimg").style.border = "2px solid";
+        //var dataURL = canvas.toDataURL("image/png");
+        $('form input[name=image_data]').val(canvas.toDataURL("image/png"));
+        $('form').submit();
+        //$('form').submit(function(e){temp=dataURL});
+        //document.getElementById("canvasimg").src = dataURL;
+        //document.getElementById("canvasimg").style.display = "inline";
     }
 
     function findxy(res, e) {
@@ -99,22 +103,31 @@ Saba Siddiqi
 
         <div class="container">
 
-            <div class="row ">
+            <div class="row">
 
-            <div class="col-md-4">
-            <canvas id="can" width="400" height="400" style=" background-color:black;"></canvas>
+            <div >
 
-                <form method = "post">{% csrf_token %}
-                    <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;" name="rec_image">
-                    <input type="button" value=dataURL id="btn" size="30" onclick="save()" >
-                    <input type="button" value="clear" id="clr" size="23" onclick="erase()" >
+
+                <form method = "post" action=".">{% csrf_token %}
+                       <div class="row">
+
+                           <div class="col-md-4" >
+                                <canvas id="can" width="400" height="400" style=" background-color:black;"></canvas>
+                                <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
+                                <input type="button" value="check" id="btn" size="30" onclick="save()" >
+                                <input type="button" value="clear" id="clr" size="23" onclick="erase()" >
+                                <input type="hidden" name="image_data" value="">
+                           </div>
+                           <div class="col-md-4" >
+                               <img style="height:300px;width=300px;border:solid 3px black;margin:10px;" src="/media/output.png"/>
+                           </div>
+
+
+                       </div>
                 </form>
 
+            </div>
 
-                <div class="row" >
-
-                    <input type="text" id="canvasData" name="canvasData"/>
-    </div>
         </div>
 
              </div>
